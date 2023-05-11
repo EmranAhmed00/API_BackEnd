@@ -1,0 +1,31 @@
+﻿@using Web_BackEnd.Models;
+@model IEnumerable<ProgramViewModel>
+
+@{
+    ViewData["Title"] = "Humor Programs";
+    var list = Model.GroupBy(c => c.ChannelName, (c, g) => new { ChannelName = c, list = g });
+}
+
+<h1>List of ( Humor Category & hasPodcast & not Archived)</h1>
+<small>Group by Channel name p1,p2,p3 ....</small>
+
+@foreach (var group in list)
+{
+    <p></p>
+    <h2>@group.ChannelName</h2>
+    @foreach (ProgramViewModel item in group.list)
+    {
+        <div class="row">
+            <div class="col-6">
+                <p>@item.Name</p>
+                <img src="@item.Image" class="img-fluid" />
+                <p>@item.Description</p>
+            </div>
+            <div class="col-6">
+                <h3>Podavsnitt</h3>
+                @await Component.InvokeAsync("Episode",new { id = item.Id })
+
+            </div>
+        </div>
+    }
+}

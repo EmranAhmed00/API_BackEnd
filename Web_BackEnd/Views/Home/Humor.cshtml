@@ -1,0 +1,26 @@
+﻿@using Web_BackEnd.Models;
+@model IEnumerable<ProgramViewModel>
+
+@{
+    ViewData["Title"] = "Humor";
+
+}
+
+<h1>List of (Humor Category)</h1>
+
+@foreach (ProgramViewModel item in Model)
+{
+    <div class="row">
+        <div class="col-6">
+            <div class="Programs">
+            <p>@item.Name</p>
+            <img src="@item.Image" class="img-fluid w-100" />
+            <p>@item.Description</p>
+            </div>
+        </div>
+        <div class="col-6">
+            <h3>Podavsnitt</h3>
+            @await Component.InvokeAsync("Episode",new { id = item.Id })
+        </div>
+    </div>
+}

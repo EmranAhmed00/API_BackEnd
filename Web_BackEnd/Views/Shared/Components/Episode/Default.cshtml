@@ -1,0 +1,20 @@
+﻿@using Web_BackEnd.Models;
+@model IEnumerable<EpisodeViewModel>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    @foreach (EpisodeViewModel cast in Model)
+    {
+        <div class="episode">
+            <p><strong>Title:</strong>@cast.Title</p>
+            <p><strong>Publication Date:</strong>@cast.PublicationDate</p>
+            <p><strong>Length:</strong>@cast.Duration</p>
+            <audio controls>
+                <source src="@cast.DisplayAudioPlayer" />
+            </audio>
+        </div>
+    }
+}else {
+    <p> No Podcast </p>
+}
